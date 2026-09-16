@@ -819,6 +819,22 @@ export type Database = {
         }
         Returns: undefined
       }
+      ensure_profile: {
+        Args: { _city: string; _full_name: string; _phone: string }
+        Returns: {
+          city: string | null
+          created_at: string
+          full_name: string
+          id: string
+          phone: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "profiles"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       gen_code: { Args: { _len: number; _prefix: string }; Returns: string }
       gen_otp: { Args: never; Returns: string }
       has_role: {

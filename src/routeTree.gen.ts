@@ -12,7 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated.admin'
+import { Route as AuthenticatedLivreurRouteImport } from './routes/_authenticated.livreur'
 import { Route as AuthenticatedMesCommandesRouteImport } from './routes/_authenticated.mes-commandes'
+import { Route as AuthenticatedNouvelleCommandeRouteImport } from './routes/_authenticated.nouvelle-commande'
+import { Route as AuthenticatedPointDepotRouteImport } from './routes/_authenticated.point-depot'
+import { Route as AuthenticatedPortefeuilleRouteImport } from './routes/_authenticated.portefeuille'
+import { Route as AuthenticatedVendeurRouteImport } from './routes/_authenticated.vendeur'
+import { Route as AuthenticatedCommandeIdRouteImport } from './routes/_authenticated.commande.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,41 +35,126 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedLivreurRoute = AuthenticatedLivreurRouteImport.update({
+  id: '/livreur',
+  path: '/livreur',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedMesCommandesRoute =
   AuthenticatedMesCommandesRouteImport.update({
     id: '/mes-commandes',
     path: '/mes-commandes',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedNouvelleCommandeRoute =
+  AuthenticatedNouvelleCommandeRouteImport.update({
+    id: '/nouvelle-commande',
+    path: '/nouvelle-commande',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedPointDepotRoute = AuthenticatedPointDepotRouteImport.update({
+  id: '/point-depot',
+  path: '/point-depot',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPortefeuilleRoute =
+  AuthenticatedPortefeuilleRouteImport.update({
+    id: '/portefeuille',
+    path: '/portefeuille',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedVendeurRoute = AuthenticatedVendeurRouteImport.update({
+  id: '/vendeur',
+  path: '/vendeur',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedCommandeIdRoute = AuthenticatedCommandeIdRouteImport.update({
+  id: '/commande/$id',
+  path: '/commande/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/livreur': typeof AuthenticatedLivreurRoute
   '/mes-commandes': typeof AuthenticatedMesCommandesRoute
+  '/nouvelle-commande': typeof AuthenticatedNouvelleCommandeRoute
+  '/point-depot': typeof AuthenticatedPointDepotRoute
+  '/portefeuille': typeof AuthenticatedPortefeuilleRoute
+  '/vendeur': typeof AuthenticatedVendeurRoute
+  '/commande/$id': typeof AuthenticatedCommandeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/livreur': typeof AuthenticatedLivreurRoute
   '/mes-commandes': typeof AuthenticatedMesCommandesRoute
+  '/nouvelle-commande': typeof AuthenticatedNouvelleCommandeRoute
+  '/point-depot': typeof AuthenticatedPointDepotRoute
+  '/portefeuille': typeof AuthenticatedPortefeuilleRoute
+  '/vendeur': typeof AuthenticatedVendeurRoute
+  '/commande/$id': typeof AuthenticatedCommandeIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/livreur': typeof AuthenticatedLivreurRoute
   '/_authenticated/mes-commandes': typeof AuthenticatedMesCommandesRoute
+  '/_authenticated/nouvelle-commande': typeof AuthenticatedNouvelleCommandeRoute
+  '/_authenticated/point-depot': typeof AuthenticatedPointDepotRoute
+  '/_authenticated/portefeuille': typeof AuthenticatedPortefeuilleRoute
+  '/_authenticated/vendeur': typeof AuthenticatedVendeurRoute
+  '/_authenticated/commande/$id': typeof AuthenticatedCommandeIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/mes-commandes'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/admin'
+    | '/livreur'
+    | '/mes-commandes'
+    | '/nouvelle-commande'
+    | '/point-depot'
+    | '/portefeuille'
+    | '/vendeur'
+    | '/commande/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/mes-commandes'
+  to:
+    | '/'
+    | '/auth'
+    | '/admin'
+    | '/livreur'
+    | '/mes-commandes'
+    | '/nouvelle-commande'
+    | '/point-depot'
+    | '/portefeuille'
+    | '/vendeur'
+    | '/commande/$id'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/admin'
+    | '/_authenticated/livreur'
     | '/_authenticated/mes-commandes'
+    | '/_authenticated/nouvelle-commande'
+    | '/_authenticated/point-depot'
+    | '/_authenticated/portefeuille'
+    | '/_authenticated/vendeur'
+    | '/_authenticated/commande/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,6 +186,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/livreur': {
+      id: '/_authenticated/livreur'
+      path: '/livreur'
+      fullPath: '/livreur'
+      preLoaderRoute: typeof AuthenticatedLivreurRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/mes-commandes': {
       id: '/_authenticated/mes-commandes'
       path: '/mes-commandes'
@@ -101,15 +207,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMesCommandesRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/nouvelle-commande': {
+      id: '/_authenticated/nouvelle-commande'
+      path: '/nouvelle-commande'
+      fullPath: '/nouvelle-commande'
+      preLoaderRoute: typeof AuthenticatedNouvelleCommandeRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/point-depot': {
+      id: '/_authenticated/point-depot'
+      path: '/point-depot'
+      fullPath: '/point-depot'
+      preLoaderRoute: typeof AuthenticatedPointDepotRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/portefeuille': {
+      id: '/_authenticated/portefeuille'
+      path: '/portefeuille'
+      fullPath: '/portefeuille'
+      preLoaderRoute: typeof AuthenticatedPortefeuilleRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/vendeur': {
+      id: '/_authenticated/vendeur'
+      path: '/vendeur'
+      fullPath: '/vendeur'
+      preLoaderRoute: typeof AuthenticatedVendeurRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/commande/$id': {
+      id: '/_authenticated/commande/$id'
+      path: '/commande/$id'
+      fullPath: '/commande/$id'
+      preLoaderRoute: typeof AuthenticatedCommandeIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedLivreurRoute: typeof AuthenticatedLivreurRoute
   AuthenticatedMesCommandesRoute: typeof AuthenticatedMesCommandesRoute
+  AuthenticatedNouvelleCommandeRoute: typeof AuthenticatedNouvelleCommandeRoute
+  AuthenticatedPointDepotRoute: typeof AuthenticatedPointDepotRoute
+  AuthenticatedPortefeuilleRoute: typeof AuthenticatedPortefeuilleRoute
+  AuthenticatedVendeurRoute: typeof AuthenticatedVendeurRoute
+  AuthenticatedCommandeIdRoute: typeof AuthenticatedCommandeIdRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedLivreurRoute: AuthenticatedLivreurRoute,
   AuthenticatedMesCommandesRoute: AuthenticatedMesCommandesRoute,
+  AuthenticatedNouvelleCommandeRoute: AuthenticatedNouvelleCommandeRoute,
+  AuthenticatedPointDepotRoute: AuthenticatedPointDepotRoute,
+  AuthenticatedPortefeuilleRoute: AuthenticatedPortefeuilleRoute,
+  AuthenticatedVendeurRoute: AuthenticatedVendeurRoute,
+  AuthenticatedCommandeIdRoute: AuthenticatedCommandeIdRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
